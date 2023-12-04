@@ -52,9 +52,7 @@ const calculateSolution = (input: string) => {
     });
   });
 
-  console.log({ characterLines: JSON.stringify(characterLines) });
-
-  const MAX = 140 - 1;
+  const MAX = 139;
 
   const total = characterLines.reduce((acc, characterLine, yIndex) => {
     return (
@@ -65,7 +63,7 @@ const calculateSolution = (input: string) => {
           if (characterLines[yIndex - 1]) {
             const numberRange = range(
               Math.max(xIndex - length, 0),
-              Math.max(xIndex + 1, MAX)
+              Math.min(xIndex + 1, MAX)
             );
             if (
               numberRange.some((x) => {
@@ -78,7 +76,7 @@ const calculateSolution = (input: string) => {
           if (characterLines[yIndex + 1]) {
             const numberRange = range(
               Math.max(xIndex - length, 0),
-              Math.max(xIndex + 1, MAX)
+              Math.min(xIndex + 1, MAX)
             );
             if (
               numberRange.some((x) => {
