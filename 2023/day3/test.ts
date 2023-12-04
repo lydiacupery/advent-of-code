@@ -15,3 +15,7 @@ describe.only("calculateSolution", () => {
     expect(calculateSolution(input)).toEqual(4361);
   });
 });
+
+/**
+ * Missing: 467, 592
+ */

@@ -32,7 +32,7 @@ type CharacterLine = {
 
 const isDigit = (char: string) => /[0-9]/.test(char);
 
-const calculateSolution = (input: string) => {
+export const calculateSolution = (input: string) => {
   const lines = input.split("\n");
   const characterLines: Array<Array<CharacterLine>> = lines.map((line) => {
     let currentNumber = "";
@@ -63,8 +63,8 @@ const calculateSolution = (input: string) => {
           if (characterLines[yIndex - 1]) {
             const numberRange = range(
               Math.max(xIndex - length, 0),
-              Math.min(xIndex + 1, MAX)
-            );
+              Math.min(xIndex + 2, MAX)
+            ); // must be +2 because range is exclusive of the last number
             if (
               numberRange.some((x) => {
                 return characterLines[yIndex - 1][x].isSymbol;
@@ -76,7 +76,7 @@ const calculateSolution = (input: string) => {
           if (characterLines[yIndex + 1]) {
             const numberRange = range(
               Math.max(xIndex - length, 0),
-              Math.min(xIndex + 1, MAX)
+              Math.min(xIndex + 2, MAX)
             );
             if (
               numberRange.some((x) => {
@@ -86,7 +86,20 @@ const calculateSolution = (input: string) => {
               return runningSubTotal + parseInt(character.currentNumber);
             }
           }
+          if (
+            characterLines[yIndex][xIndex - 1] &&
+            characterLines[yIndex][xIndex - 1].isSymbol
+          ) {
+            return runningSubTotal + parseInt(character.currentNumber);
+          }
+          if (
+            characterLines[yIndex][xIndex + 1] &&
+            characterLines[yIndex][xIndex + 1].isSymbol
+          ) {
+            return runningSubTotal + parseInt(character.currentNumber);
+          }
         }
+
         return runningSubTotal;
       }, 0)
     );
@@ -98,7 +111,5 @@ const calculateSolution = (input: string) => {
 console.log("RESULT", calculateSolution(input));
 
 // too low: 438127
-// too high:551128
+// too high: 551128
 // too high: 578783
-
-// anwer is 526404
