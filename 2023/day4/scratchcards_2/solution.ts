@@ -1,5 +1,4 @@
 import * as R from "ramda";
-import { input } from "./input";
 
 export const solution = (input: string) => {
   const lines = input.split("\n");
@@ -21,5 +20,3 @@ export const solution = (input: string) => {
     return acc + numberOfCopies;
   }, 0);
 };
-
-console.log("solution", solution(input));

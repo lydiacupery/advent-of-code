@@ -24,7 +24,6 @@ So, in this example, the Elf's pile of scratchcards is worth 13 points.
 Take a seat in the large pile of colorful cards. How many points are they worth in total?
  */
 import * as R from "ramda";
-import { input } from "./input";
 
 export const solution = (input: string) => {
   const lines = input.split("\n");
@@ -43,7 +42,5 @@ export const solution = (input: string) => {
     return acc + points;
   }, 0);
 };
-
-console.log("solution", solution(input));
 
 // 31669 is too high
