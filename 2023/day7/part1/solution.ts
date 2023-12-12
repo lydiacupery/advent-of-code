@@ -69,22 +69,18 @@ const calculateHandRank = (hand: string[]) => {
   return 1;
 };
 
+const getNumericValue = (hand: string[]) =>
+  hand
+    .map((card, i) => cardToRank[card] * Math.pow(10, 6 - i))
+    .reduce((a, b) => a + b, 0);
+
 const compareHands = (hand1: string[], hand2: string[]) => {
   const hand1Rank = calculateHandRank(hand1);
   const hand2Rank = calculateHandRank(hand2);
   if (hand1Rank !== hand2Rank) {
     return hand1Rank - hand2Rank;
   }
-  let index = 0;
-  while (index < 5) {
-    const hand1Card = hand1[index];
-    const hand2Card = hand2[index];
-    if (hand1Card !== hand2Card) {
-      return cardToRank[hand1Card] - cardToRank[hand2Card];
-    }
-    index++;
-  }
-  return 0;
+  return getNumericValue(hand1) - getNumericValue(hand2);
 };
 
 export const solution = (input: string) => {
